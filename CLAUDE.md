@@ -28,5 +28,6 @@ obi1 のデザインシステムのミラーと配布物のリポジトリ。概
 
 ## 利用側
 
-- obi1.dev（`obi1-dev/obi1.dev`）: いまは `src/assets/globals.css`・`src/lib/og-image.ts`・`design/marp/` に値を直接持っている。このパッケージへの置き換えは未実施。
-- スライド用リポジトリ・ポートフォリオ: このパッケージを Git タグ指定で入れる。
+- obi1.dev（`obi1-dev/obi1.dev`）: `github:obi1-dev/design-system#v<version>` で入れている。`src/assets/globals.css` が `tokens.css` を、`src/lib/og-image.ts` が `tokens.color` を読む。値は直書きしない。
+- スライド用リポジトリ・ポートフォリオ: 同じくこのパッケージを Git タグ指定で入れる。
+- タグを打ったら、利用側の依存の参照先を新しいタグに上げる（タグはリポジトリの GitHub のリリースから作る）。
