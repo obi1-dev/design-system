@@ -1,0 +1,146 @@
+/* obi1.dev design system v1.0.0 — generated from src/tokens.json. Do not edit. */
+:root {
+	--paper: #ffffff;
+	--surface: #f5f6f6;
+	--ink: #222322;
+	--muted: #646965;
+	--accent: #39566b;
+	--line: #d8dcda;
+	--line-strong: #a6b0b5;
+	--code-bg: #edf1f3;
+	--code-ink: #304e63;
+	--code-title-bg: #e9edee;
+	--code-title-ink: #414a50;
+	--callout-info-bg: #f0f4f6;
+	--callout-info-line: #d4dfe5;
+	--callout-warning-bg: #faf7ed;
+	--callout-warning-line: #e4d9b8;
+	--font-sans: "Inter", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
+	--font-mono: "JetBrains Mono", ui-monospace, monospace;
+	--space-1: 4px;
+	--space-2: 8px;
+	--space-3: 12px;
+	--space-4: 16px;
+	--space-5: 20px;
+	--space-6: 24px;
+	--space-7: 28px;
+	--space-8: 32px;
+	--space-12: 48px;
+	--space-16: 64px;
+	--space-20: 80px;
+	--space-24: 96px;
+	--radius-none: 0px;
+	--radius-sm: 3px;
+	--radius-md: 4px;
+	--page-width: 1080px;
+	--reading-width: 720px;
+	--header-height: 100px;
+	--hit-target: 44px;
+	--avatar-size: 72px;
+	--bp-tablet: 1023px;
+	--bp-mobile: 767px;
+}
+
+/* type styles */
+.text-article-title {
+	font-family: var(--font-sans);
+	font-size: 38px;
+	line-height: 1.55;
+	font-weight: 700;
+	letter-spacing: -0.035em;
+}
+.text-brand {
+	font-family: var(--font-sans);
+	font-size: 28px;
+	line-height: 1.8;
+	font-weight: 700;
+	letter-spacing: -0.055em;
+}
+.text-heading-2 {
+	font-family: var(--font-sans);
+	font-size: 25px;
+	line-height: 1.65;
+	font-weight: 700;
+	letter-spacing: -0.025em;
+}
+.text-intro-role {
+	font-family: var(--font-sans);
+	font-size: 25px;
+	line-height: 1.5;
+	font-weight: 700;
+	letter-spacing: -0.025em;
+}
+.text-section-title {
+	font-family: var(--font-sans);
+	font-size: 25px;
+	line-height: 1.6;
+	font-weight: 600;
+	letter-spacing: -0.025em;
+}
+.text-heading-3 {
+	font-family: var(--font-sans);
+	font-size: 21px;
+	line-height: 1.7;
+	font-weight: 600;
+}
+.text-row-title {
+	font-family: var(--font-sans);
+	font-size: 19px;
+	line-height: 1.65;
+	font-weight: 600;
+}
+.text-heading-4 {
+	font-family: var(--font-sans);
+	font-size: 18px;
+	line-height: 1.7;
+	font-weight: 600;
+}
+.text-prose {
+	font-family: var(--font-sans);
+	font-size: 17px;
+	line-height: 1.95;
+	font-weight: 400;
+}
+.text-body {
+	font-family: var(--font-sans);
+	font-size: 16px;
+	line-height: 1.8;
+	font-weight: 400;
+}
+.text-body-sm {
+	font-family: var(--font-sans);
+	font-size: 15px;
+	line-height: 1.95;
+	font-weight: 400;
+}
+.text-ui {
+	font-family: var(--font-sans);
+	font-size: 14px;
+	line-height: 1.8;
+	font-weight: 400;
+}
+.text-caption {
+	font-family: var(--font-sans);
+	font-size: 13px;
+	line-height: 1.8;
+	font-weight: 400;
+}
+.text-mono-label {
+	font-family: var(--font-mono);
+	font-size: 15px;
+	line-height: 1.6;
+	font-weight: 400;
+	letter-spacing: 0.035em;
+}
+.text-mono-meta {
+	font-family: var(--font-mono);
+	font-size: 13px;
+	line-height: 1.8;
+	font-weight: 400;
+}
+.text-code {
+	font-family: var(--font-mono);
+	font-size: 13px;
+	line-height: 1.85;
+	font-weight: 400;
+}

@@ -1,0 +1,168 @@
+{
+  "v": 3,
+  "assetGroups": {
+    "Logos": {
+      "files": {
+        "obi1-180.png": {
+          "blob": "63e8c7ca7161755371c60171be64e8f5",
+          "name": "obi1-180.png",
+          "size": 8897,
+          "type": "image/png"
+        },
+        "obi1-32.png": {
+          "blob": "63b0152e5081c1f295e41b12fc0873f8",
+          "name": "obi1-32.png",
+          "size": 1129,
+          "type": "image/png"
+        },
+        "obi1-mark.svg": {
+          "blob": "0d2cf3de1911f27af64d58b6b6a3e9b2",
+          "name": "obi1-mark.svg",
+          "size": 11326,
+          "type": "image/svg+xml"
+        }
+      },
+      "name": "Logos",
+      "order": [
+        "obi1-mark.svg",
+        "obi1-180.png",
+        "obi1-32.png"
+      ],
+      "tile": "s"
+    },
+    "OG": {
+      "files": {
+        "og-article.png": {
+          "blob": "f435162708326c902ee57f462d200abc",
+          "name": "og-article.png",
+          "size": 42203,
+          "type": "image/png"
+        },
+        "og-home.png": {
+          "blob": "31e97539dee28ea7ddfcb0f510c430e5",
+          "name": "og-home.png",
+          "size": 25859,
+          "type": "image/png"
+        }
+      },
+      "name": "OG",
+      "order": [
+        "og-home.png",
+        "og-article.png"
+      ],
+      "tile": "l"
+    },
+    "Profile": {
+      "files": {
+        "obi1-profile.png": {
+          "blob": "65b85e179f5a7b9e7225be5e51580375",
+          "name": "obi1-profile.png",
+          "size": 95296,
+          "type": "image/png"
+        }
+      },
+      "name": "Profile",
+      "order": [
+        "obi1-profile.png"
+      ],
+      "tile": "m"
+    },
+    "Marp": {
+      "name": "Marp",
+      "tile": "l",
+      "order": [
+        "slide-01.png",
+        "slide-02.png",
+        "slide-03.png",
+        "slide-04.png",
+        "slide-05.png",
+        "slide-06.png",
+        "slide-07.png",
+        "slide-08.png",
+        "slide-09.png"
+      ],
+      "files": {
+        "slide-01.png": {
+          "name": "slide-01.png",
+          "blob": "ead3601e1359e382588d998242063a86",
+          "size": 62888,
+          "type": "image/png"
+        },
+        "slide-02.png": {
+          "name": "slide-02.png",
+          "blob": "a220a5b4ee9f2806cc5991038f6f5b40",
+          "size": 90179,
+          "type": "image/png"
+        },
+        "slide-03.png": {
+          "name": "slide-03.png",
+          "blob": "6110b7bf2f4adc7924384b694157e324",
+          "size": 49257,
+          "type": "image/png"
+        },
+        "slide-04.png": {
+          "name": "slide-04.png",
+          "blob": "8c07a67630830c8bcabfce333c806f0b",
+          "size": 69987,
+          "type": "image/png"
+        },
+        "slide-05.png": {
+          "name": "slide-05.png",
+          "blob": "d2c7e65805c5729c2474c799e4be3bbc",
+          "size": 65995,
+          "type": "image/png"
+        },
+        "slide-06.png": {
+          "name": "slide-06.png",
+          "blob": "f15158cf038ecbb75f0acef59a42e7dd",
+          "size": 69282,
+          "type": "image/png"
+        },
+        "slide-07.png": {
+          "name": "slide-07.png",
+          "blob": "ba9fa4a0d6ba1a2d3838e46aaa5bba82",
+          "size": 76604,
+          "type": "image/png"
+        },
+        "slide-08.png": {
+          "name": "slide-08.png",
+          "blob": "7b7c0489db3cc4037b73fc6c3d784494",
+          "size": 55111,
+          "type": "image/png"
+        },
+        "slide-09.png": {
+          "name": "slide-09.png",
+          "blob": "f709073acb0322c8e26f0782a158fd90",
+          "size": 40510,
+          "type": "image/png"
+        }
+      }
+    }
+  },
+  "blobs": {},
+  "createdOnFiles": {
+    "at": "2026-11-20T09:40:00Z",
+    "v": 1
+  },
+  "docs": {
+    "readme": "project/README.md",
+    "sections": []
+  },
+  "groups": [
+    "Logos",
+    "Profile",
+    "OG",
+    "Marp"
+  ],
+  "lastChange": {
+    "by": "Claude",
+    "at": "2026-11-20T17:50:00Z",
+    "via": "Claude Code",
+    "note": "Marp テーマ obi1 とテンプレート、スライド節・Slides カードを追加"
+  },
+  "layout": "files",
+  "libraries": [],
+  "namespace": "Obi1",
+  "sections": {},
+  "title": "obi1.dev デザインシステム"
+}

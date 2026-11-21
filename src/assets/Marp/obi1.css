@@ -1,0 +1,302 @@
+/*!
+ * @theme obi1
+ * @auto-scaling true
+ * @size 16:9 1280px 720px
+ * @size 4:3 960px 720px
+ *
+ * obi1.dev デザインシステム（B「静かな編集室」）の Marp テーマ。
+ * 白地・墨の文字・青灰 1 色・1px の罫線。影・グラデーションなし、角丸は最大 4px。
+ */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
+
+:root {
+	/* color — tokens.json と同じ値 */
+	--paper: #ffffff;
+	--surface: #f5f6f6;
+	--ink: #222322;
+	--muted: #646965;
+	--accent: #39566b;
+	--line: #d8dcda;
+	--code-bg: #edf1f3;
+	--code-ink: #304e63;
+	--code-title-bg: #e9edee;
+	--code-title-ink: #414a50;
+	--callout-info-bg: #f0f4f6;
+	--callout-info-line: #d4dfe5;
+	--callout-warning-bg: #faf7ed;
+	--callout-warning-line: #e4d9b8;
+	/* type */
+	--font-sans: "Inter", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
+	--font-mono: "JetBrains Mono", ui-monospace, monospace;
+	/* radius */
+	--radius-sm: 3px;
+	--radius-md: 4px;
+}
+
+/* ---- slide ---- */
+section {
+	width: 1280px;
+	height: 720px;
+	box-sizing: border-box;
+	padding: 112px 96px 96px;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	gap: 0;
+	background: var(--paper);
+	color: var(--ink);
+	font-family: var(--font-sans);
+	font-size: 28px;
+	line-height: 1.8;
+	font-synthesis: none;
+	letter-spacing: 0;
+}
+section > *:first-child { margin-top: 0; }
+section > * { flex-shrink: 0; }
+
+/* header = サイトヘッダーと同じく、文字のサイト名＋下の罫線 */
+header {
+	position: absolute;
+	top: 0;
+	left: 96px;
+	right: 96px;
+	height: 72px;
+	display: flex;
+	align-items: center;
+	border-bottom: 1px solid var(--line);
+	font-family: var(--font-mono);
+	font-size: 18px;
+	letter-spacing: 0.035em;
+	color: var(--muted);
+}
+/* footer = 左にサイト名、右にページ番号（等幅・muted） */
+footer {
+	position: absolute;
+	left: 96px;
+	bottom: 32px;
+	line-height: 1.6;
+	font-family: var(--font-sans);
+	font-size: 20px;
+	font-weight: 700;
+	letter-spacing: -0.055em;
+	color: var(--ink);
+}
+section::after {
+	position: absolute;
+	right: 96px;
+	bottom: 32px;
+	padding: 0;
+	line-height: 1.6;
+	font-family: var(--font-mono);
+	font-size: 18px;
+	color: var(--muted);
+	content: attr(data-marpit-pagination) " / " attr(data-marpit-pagination-total);
+}
+
+/* ---- headings ---- */
+h1, h2, h3, h4 { margin: 0; color: var(--ink); text-wrap: pretty; }
+h1 {
+	font-size: 60px;
+	line-height: 1.45;
+	font-weight: 700;
+	letter-spacing: -0.035em;
+}
+h2 {
+	font-size: 40px;
+	line-height: 1.55;
+	font-weight: 700;
+	letter-spacing: -0.025em;
+	padding-bottom: 16px;
+	margin-bottom: 36px;
+	border-bottom: 1px solid var(--line);
+}
+h3 {
+	font-size: 32px;
+	line-height: 1.6;
+	font-weight: 600;
+	margin: 28px 0 12px;
+}
+h4 { font-size: 28px; font-weight: 600; margin: 24px 0 8px; }
+
+/* ---- text ---- */
+p { margin: 0 0 20px; }
+strong { font-weight: 600; }
+em { font-style: normal; color: var(--accent); }
+a {
+	color: var(--accent);
+	text-decoration: underline;
+	text-decoration-thickness: 1px;
+	text-underline-offset: 0.24em;
+}
+ul, ol { margin: 0 0 20px; padding-left: 1.4em; }
+ul { list-style: disc; }
+li { margin: 6px 0; }
+li::marker { color: var(--muted); }
+li > ul, li > ol { margin: 4px 0; }
+blockquote {
+	margin: 24px 0;
+	padding: 4px 28px;
+	border-left: 2px solid var(--line);
+	color: var(--muted);
+}
+blockquote p { margin: 0; }
+hr { border: 0; border-top: 1px solid var(--line); margin: 32px 0; }
+small, .caption { font-size: 20px; color: var(--muted); }
+.mono, time { font-family: var(--font-mono); }
+.tags { font-family: var(--font-mono); font-size: 20px; color: var(--accent); word-spacing: 0.6em; }
+.muted { color: var(--muted); }
+
+/* ---- code ---- */
+code {
+	font-family: var(--font-mono);
+	font-size: 0.85em;
+	background: var(--code-bg);
+	color: var(--code-ink);
+	padding: 0.15em 0.35em;
+	border-radius: var(--radius-sm);
+}
+pre {
+	margin: 20px 0;
+	padding: 24px 28px;
+	background: var(--paper);
+	border: 1px solid var(--line);
+	border-radius: var(--radius-md);
+	font-size: 20px;
+	line-height: 1.75;
+	overflow: hidden;
+}
+pre code { background: none; padding: 0; color: var(--ink); font-size: inherit; border-radius: 0; }
+/* Marp 標準のハイライト（highlight.js）を github-light 相当の色に */
+.hljs-keyword, .hljs-selector-tag, .hljs-built_in, .hljs-type { color: #d73a49; }
+.hljs-string, .hljs-attr, .hljs-regexp { color: #032f62; }
+.hljs-title, .hljs-title.function_, .hljs-section { color: #6f42c1; }
+.hljs-number, .hljs-literal, .hljs-variable, .hljs-attribute { color: #005cc5; }
+.hljs-comment, .hljs-quote { color: #6a737d; }
+.hljs-name, .hljs-tag { color: #22863a; }
+.code-title {
+	margin: 20px 0 -21px;
+	padding: 8px 24px;
+	background: var(--code-title-bg);
+	color: var(--code-title-ink);
+	border: 1px solid var(--line);
+	border-bottom: 0;
+	border-radius: var(--radius-md) var(--radius-md) 0 0;
+	font-family: var(--font-mono);
+	font-size: 18px;
+}
+.code-title + pre { border-radius: 0 0 var(--radius-md) var(--radius-md); }
+
+/* ---- table ---- */
+table { border-collapse: collapse; font-size: 22px; margin: 16px 0; }
+th, td { border: 1px solid var(--line); padding: 12px 20px; text-align: left; }
+th { background: var(--surface); font-weight: 600; }
+
+/* ---- images ---- */
+img { border-radius: var(--radius-sm); }
+img.frame { border: 1px solid var(--line); }
+
+/* ---- callout（html: true のとき <div class="callout info"> で使う） ---- */
+.callout {
+	display: flex;
+	gap: 16px;
+	margin: 20px 0;
+	padding: 20px 28px;
+	border-radius: var(--radius-md);
+	border: 1px solid var(--callout-info-line);
+	background: var(--callout-info-bg);
+}
+.callout.warning { border-color: var(--callout-warning-line); background: var(--callout-warning-bg); }
+.callout p { margin: 0; }
+
+/* ---- section heading（等幅ラベル＋墨の罫線） ---- */
+.label {
+	display: flex;
+	align-items: center;
+	gap: 24px;
+	margin-bottom: 24px;
+	font-family: var(--font-mono);
+	font-size: 20px;
+	letter-spacing: 0.035em;
+	color: var(--ink);
+}
+.label::after { content: ""; flex: 1; height: 1px; background: var(--ink); }
+
+/* ==== slide classes ==== */
+
+/* title：OG 画像と同じく、上下の細い罫線の間にタイトルを左揃え */
+section.title {
+	justify-content: center;
+	padding: 96px 120px;
+}
+section.title::before {
+	content: "";
+	position: absolute;
+	left: 120px;
+	right: 120px;
+	top: 64px;
+	bottom: 64px;
+	border-top: 1px solid var(--line);
+	border-bottom: 1px solid var(--line);
+	pointer-events: none;
+}
+section.title h1 { font-size: 64px; margin-bottom: 32px; }
+section.title p { margin: 0; font-size: 24px; color: var(--muted); }
+section.title .tags { margin-top: 8px; }
+section.title::after, section.chapter::after, section.end::after { display: none; }
+
+/* chapter：章扉。等幅の番号と墨の罫線、大きな見出し */
+section.chapter { justify-content: center; }
+section.chapter h2 {
+	font-size: 56px;
+	border: 0;
+	padding: 0;
+	margin: 0;
+}
+section.chapter p { margin-top: 16px; color: var(--muted); }
+
+/* center：トップのヒーローと同じ中央揃え */
+section.center { justify-content: center; align-items: center; text-align: center; }
+section.center h1, section.center h2 { border: 0; margin-bottom: 24px; }
+
+/* split：2 カラム。プロフィール欄と同じく間に line の縦罫線 */
+section.split .columns {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 0;
+	flex: 1;
+	min-height: 0;
+}
+section.split .columns > div { padding-right: 48px; }
+section.split .columns > div + div { padding: 0 0 0 48px; border-left: 1px solid var(--line); }
+
+/* list：記事一覧と同じ 3 列の行（日付・タイトル・タグ） */
+section .rows { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--line); }
+section .rows li {
+	display: grid;
+	grid-template-columns: 180px 1fr auto;
+	gap: 32px;
+	align-items: baseline;
+	margin: 0;
+	padding: 18px 0;
+	border-bottom: 1px solid var(--line);
+}
+section .rows time, section .rows .k { font-family: var(--font-mono); font-size: 20px; color: var(--muted); }
+section .rows b { font-weight: 600; }
+section .rows .tags { font-size: 18px; }
+
+/* end：締め。中央に名前とリンク */
+section.end { justify-content: center; align-items: center; text-align: center; }
+section.end h2 { border: 0; padding: 0; margin: 0 0 16px; font-size: 48px; }
+section.end p { color: var(--muted); }
+section.end img.avatar {
+	width: 120px;
+	height: 120px;
+	object-fit: contain;
+	border: 1px solid var(--line);
+	border-radius: var(--radius-md);
+	background: var(--paper);
+	margin: 0 auto 24px;
+}
+
+/* 見出し直後は余白を重ねない */
+h2 + pre, h2 + .code-title, h2 + table, h2 + .callout, h2 + ul, h2 + ol { margin-top: 0; }
