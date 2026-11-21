@@ -1,7 +1,7 @@
 {
 	"name": "@obi1-dev/design-system",
-	"version": "1.0.0",
-	"description": "obi1.dev デザインシステム（B「静かな編集室」）のトークン・Tailwind テーマ・Marp テーマ",
+	"version": "1.1.0",
+	"description": "obi1 デザインシステム（冬空と稜線）のトークン・Tailwind テーマ・Marp テーマ・山のモチーフ",
 	"type": "module",
 	"private": true,
 	"license": "UNLICENSED",
@@ -9,7 +9,9 @@
 		"type": "git",
 		"url": "git+https://github.com/obi1-dev/design-system.git"
 	},
-	"files": ["dist"],
+	"files": [
+		"dist"
+	],
 	"exports": {
 		".": {
 			"types": "./dist/tokens.d.ts",
@@ -19,7 +21,12 @@
 		"./tailwind.css": "./dist/tailwind.css",
 		"./fonts.css": "./dist/fonts.css",
 		"./tokens.json": "./dist/tokens.json",
-		"./marp/*": "./dist/marp/*"
+		"./marp/*": "./dist/marp/*",
+		"./motifs": {
+			"types": "./dist/motifs.d.ts",
+			"default": "./dist/motifs.js"
+		},
+		"./motifs/*": "./dist/motifs/*"
 	},
 	"scripts": {
 		"build": "node scripts/build.mjs",

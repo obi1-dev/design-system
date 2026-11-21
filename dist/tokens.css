@@ -1,10 +1,15 @@
-/* obi1.dev design system v1.0.0 — generated from src/tokens.json. Do not edit. */
+/* obi1.dev design system v1.1.0 — generated from src/tokens.json. Do not edit. */
 :root {
 	--paper: #ffffff;
 	--surface: #f5f6f6;
 	--ink: #222322;
 	--muted: #646965;
-	--accent: #39566b;
+	--accent: #24538f;
+	--accent-deep: #1d4577;
+	--accent-faint: #86a3c9;
+	--forest: #34503f;
+	--snow: #eef2f6;
+	--sunrise: #a85f3f;
 	--line: #d8dcda;
 	--line-strong: #a6b0b5;
 	--code-bg: #edf1f3;

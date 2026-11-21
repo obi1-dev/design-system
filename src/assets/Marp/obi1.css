@@ -4,19 +4,25 @@
  * @size 16:9 1280px 720px
  * @size 4:3 960px 720px
  *
- * obi1.dev デザインシステム（B「静かな編集室」）の Marp テーマ。
- * 白地・墨の文字・青灰 1 色・1px の罫線。影・グラデーションなし、角丸は最大 4px。
+ * obi1 デザインシステム「冬空と稜線」の Marp テーマ。
+ * 雪の額縁に白い板。表紙・章扉・引用・キーワード・締めは冬空の全面。
+ * 表紙に八ヶ岳連峰の稜線、章扉と締めに蓼科山のシルエット。影・グラデーションなし、角丸は最大 4px。
  */
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
 
 :root {
-	/* color — tokens.json と同じ値 */
+	/* tokens — design-system の tokens.json と同じ値（配布版はビルド時に再生成） */
 	--paper: #ffffff;
-	--surface: #f5f6f6;
 	--ink: #222322;
 	--muted: #646965;
-	--accent: #39566b;
 	--line: #d8dcda;
+	--surface: #f5f6f6;
+	--accent: #24538f;
+	--accent-deep: #1d4577;
+	--accent-faint: #86a3c9;
+	--forest: #34503f;
+	--snow: #eef2f6;
+	--sunrise: #a85f3f;
 	--code-bg: #edf1f3;
 	--code-ink: #304e63;
 	--code-title-bg: #e9edee;
@@ -25,278 +31,206 @@
 	--callout-info-line: #d4dfe5;
 	--callout-warning-bg: #faf7ed;
 	--callout-warning-line: #e4d9b8;
-	/* type */
 	--font-sans: "Inter", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
 	--font-mono: "JetBrains Mono", ui-monospace, monospace;
-	/* radius */
 	--radius-sm: 3px;
 	--radius-md: 4px;
 }
 
-/* ---- slide ---- */
+/* ==== 額縁と板 ==== */
 section {
 	width: 1280px;
 	height: 720px;
 	box-sizing: border-box;
-	padding: 112px 96px 96px;
+	position: relative;
+	isolation: isolate;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
-	gap: 0;
-	background: var(--paper);
+	/* 額縁（雪）: 上左右 20px、下 56px。板の内側の余白 52px / 64px */
+	padding: 72px 84px 96px;
+	background: var(--snow);
 	color: var(--ink);
 	font-family: var(--font-sans);
 	font-size: 28px;
 	line-height: 1.8;
 	font-synthesis: none;
-	letter-spacing: 0;
 }
-section > *:first-child { margin-top: 0; }
 section > * { flex-shrink: 0; }
-
-/* header = サイトヘッダーと同じく、文字のサイト名＋下の罫線 */
-header {
+section > *:first-child { margin-top: 0; }
+/* 白い板 */
+section::before {
+	content: "";
 	position: absolute;
-	top: 0;
-	left: 96px;
-	right: 96px;
-	height: 72px;
-	display: flex;
-	align-items: center;
-	border-bottom: 1px solid var(--line);
-	font-family: var(--font-mono);
-	font-size: 18px;
-	letter-spacing: 0.035em;
-	color: var(--muted);
+	inset: 20px 20px 56px;
+	z-index: -1;
+	background: var(--paper);
+	border: 1px solid var(--line);
+	pointer-events: none;
 }
-/* footer = 左にサイト名、右にページ番号（等幅・muted） */
+/* 上部の header は使わない */
+header { display: none; }
+/* 額縁の下帯: 左にサイト名、右にページ番号 */
 footer {
 	position: absolute;
-	left: 96px;
-	bottom: 32px;
-	line-height: 1.6;
-	font-family: var(--font-sans);
-	font-size: 20px;
+	left: 24px;
+	bottom: 14px;
+	font-size: 18px;
 	font-weight: 700;
 	letter-spacing: -0.055em;
+	line-height: 1.6;
 	color: var(--ink);
 }
 section::after {
 	position: absolute;
-	right: 96px;
-	bottom: 32px;
+	right: 24px;
+	bottom: 14px;
 	padding: 0;
-	line-height: 1.6;
 	font-family: var(--font-mono);
-	font-size: 18px;
-	color: var(--muted);
-	content: attr(data-marpit-pagination) " / " attr(data-marpit-pagination-total);
-}
-
-/* ---- headings ---- */
-h1, h2, h3, h4 { margin: 0; color: var(--ink); text-wrap: pretty; }
-h1 {
-	font-size: 60px;
-	line-height: 1.45;
-	font-weight: 700;
-	letter-spacing: -0.035em;
-}
-h2 {
-	font-size: 40px;
-	line-height: 1.55;
-	font-weight: 700;
-	letter-spacing: -0.025em;
-	padding-bottom: 16px;
-	margin-bottom: 36px;
-	border-bottom: 1px solid var(--line);
-}
-h3 {
-	font-size: 32px;
+	font-size: 16px;
 	line-height: 1.6;
-	font-weight: 600;
-	margin: 28px 0 12px;
+	color: var(--muted);
+	content: attr(data-marpit-pagination);
 }
-h4 { font-size: 28px; font-weight: 600; margin: 24px 0 8px; }
 
-/* ---- text ---- */
+/* ==== 見出しと本文 ==== */
+h1, h2, h3, h4 { margin: 0; color: var(--ink); text-wrap: pretty; }
+h1 { font-size: 60px; line-height: 1.45; font-weight: 700; letter-spacing: -0.035em; }
+/* タイトル: 左上・600・下線なし */
+h2 { font-size: 38px; line-height: 1.5; font-weight: 600; letter-spacing: -0.025em; margin-bottom: 20px; }
+h3 { font-size: 30px; line-height: 1.6; font-weight: 600; margin: 24px 0 8px; }
+h4 { font-size: 28px; font-weight: 600; margin: 20px 0 8px; }
+/* タイトル直下の太字 1 行 = リード */
+h2 + p:has(> strong:only-child) { margin-bottom: 16px; }
+h2 + p > strong:only-child { display: block; font-size: 28px; font-weight: 700; }
 p { margin: 0 0 20px; }
 strong { font-weight: 600; }
-em { font-style: normal; color: var(--accent); }
-a {
-	color: var(--accent);
-	text-decoration: underline;
-	text-decoration-thickness: 1px;
-	text-underline-offset: 0.24em;
-}
+/* 強調は朝焼け色。1 枚に 1 か所まで */
+em { font-style: normal; color: var(--sunrise); }
+a { color: var(--accent); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.24em; }
 ul, ol { margin: 0 0 20px; padding-left: 1.4em; }
 ul { list-style: disc; }
 li { margin: 6px 0; }
 li::marker { color: var(--muted); }
 li > ul, li > ol { margin: 4px 0; }
-blockquote {
-	margin: 24px 0;
-	padding: 4px 28px;
-	border-left: 2px solid var(--line);
-	color: var(--muted);
-}
+blockquote { margin: 24px 0; padding: 4px 28px; border-left: 2px solid var(--line); color: var(--muted); }
 blockquote p { margin: 0; }
 hr { border: 0; border-top: 1px solid var(--line); margin: 32px 0; }
 small, .caption { font-size: 20px; color: var(--muted); }
 .mono, time { font-family: var(--font-mono); }
 .tags { font-family: var(--font-mono); font-size: 20px; color: var(--accent); word-spacing: 0.6em; }
 .muted { color: var(--muted); }
+h2 + pre, h2 + .code-title, h2 + table, h2 + .callout, h2 + ul, h2 + ol { margin-top: 0; }
 
-/* ---- code ---- */
-code {
-	font-family: var(--font-mono);
-	font-size: 0.85em;
-	background: var(--code-bg);
-	color: var(--code-ink);
-	padding: 0.15em 0.35em;
-	border-radius: var(--radius-sm);
-}
-pre {
-	margin: 20px 0;
-	padding: 24px 28px;
-	background: var(--paper);
-	border: 1px solid var(--line);
-	border-radius: var(--radius-md);
-	font-size: 20px;
-	line-height: 1.75;
-	overflow: hidden;
-}
+/* ==== コード ==== */
+code { font-family: var(--font-mono); font-size: 0.85em; background: var(--code-bg); color: var(--code-ink); padding: 0.15em 0.35em; border-radius: var(--radius-sm); }
+pre { margin: 20px 0; padding: 24px 28px; background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-md); font-size: 20px; line-height: 1.75; overflow: hidden; }
 pre code { background: none; padding: 0; color: var(--ink); font-size: inherit; border-radius: 0; }
-/* Marp 標準のハイライト（highlight.js）を github-light 相当の色に */
 .hljs-keyword, .hljs-selector-tag, .hljs-built_in, .hljs-type { color: #d73a49; }
 .hljs-string, .hljs-attr, .hljs-regexp { color: #032f62; }
 .hljs-title, .hljs-title.function_, .hljs-section { color: #6f42c1; }
 .hljs-number, .hljs-literal, .hljs-variable, .hljs-attribute { color: #005cc5; }
 .hljs-comment, .hljs-quote { color: #6a737d; }
 .hljs-name, .hljs-tag { color: #22863a; }
-.code-title {
-	margin: 20px 0 -21px;
-	padding: 8px 24px;
-	background: var(--code-title-bg);
-	color: var(--code-title-ink);
-	border: 1px solid var(--line);
-	border-bottom: 0;
-	border-radius: var(--radius-md) var(--radius-md) 0 0;
-	font-family: var(--font-mono);
-	font-size: 18px;
-}
+.code-title { margin: 20px 0 -21px; padding: 8px 24px; background: var(--code-title-bg); color: var(--code-title-ink); border: 1px solid var(--line); border-bottom: 0; border-radius: var(--radius-md) var(--radius-md) 0 0; font-family: var(--font-mono); font-size: 18px; }
 .code-title + pre { border-radius: 0 0 var(--radius-md) var(--radius-md); }
 
-/* ---- table ---- */
+/* ==== 表・画像・callout ==== */
 table { border-collapse: collapse; font-size: 22px; margin: 16px 0; }
 th, td { border: 1px solid var(--line); padding: 12px 20px; text-align: left; }
 th { background: var(--surface); font-weight: 600; }
-
-/* ---- images ---- */
 img { border-radius: var(--radius-sm); }
 img.frame { border: 1px solid var(--line); }
-
-/* ---- callout（html: true のとき <div class="callout info"> で使う） ---- */
-.callout {
-	display: flex;
-	gap: 16px;
-	margin: 20px 0;
-	padding: 20px 28px;
-	border-radius: var(--radius-md);
-	border: 1px solid var(--callout-info-line);
-	background: var(--callout-info-bg);
-}
+.callout { display: flex; gap: 16px; margin: 20px 0; padding: 20px 28px; border-radius: var(--radius-md); border: 1px solid var(--callout-info-line); background: var(--callout-info-bg); }
 .callout.warning { border-color: var(--callout-warning-line); background: var(--callout-warning-bg); }
 .callout p { margin: 0; }
 
-/* ---- section heading（等幅ラベル＋墨の罫線） ---- */
-.label {
-	display: flex;
-	align-items: center;
-	gap: 24px;
-	margin-bottom: 24px;
-	font-family: var(--font-mono);
-	font-size: 20px;
-	letter-spacing: 0.035em;
-	color: var(--ink);
-}
-.label::after { content: ""; flex: 1; height: 1px; background: var(--ink); }
-
-/* ==== slide classes ==== */
-
-/* title：OG 画像と同じく、上下の細い罫線の間にタイトルを左揃え */
-section.title {
-	justify-content: center;
-	padding: 96px 120px;
-}
-section.title::before {
-	content: "";
-	position: absolute;
-	left: 120px;
-	right: 120px;
-	top: 64px;
-	bottom: 64px;
-	border-top: 1px solid var(--line);
-	border-bottom: 1px solid var(--line);
-	pointer-events: none;
-}
-section.title h1 { font-size: 64px; margin-bottom: 32px; }
-section.title p { margin: 0; font-size: 24px; color: var(--muted); }
-section.title .tags { margin-top: 8px; }
-section.title::after, section.chapter::after, section.end::after { display: none; }
-
-/* chapter：章扉。等幅の番号と墨の罫線、大きな見出し */
-section.chapter { justify-content: center; }
-section.chapter h2 {
-	font-size: 56px;
-	border: 0;
-	padding: 0;
-	margin: 0;
-}
-section.chapter p { margin-top: 16px; color: var(--muted); }
-
-/* center：トップのヒーローと同じ中央揃え */
-section.center { justify-content: center; align-items: center; text-align: center; }
-section.center h1, section.center h2 { border: 0; margin-bottom: 24px; }
-
-/* split：2 カラム。プロフィール欄と同じく間に line の縦罫線 */
-section.split .columns {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	gap: 0;
-	flex: 1;
-	min-height: 0;
-}
-section.split .columns > div { padding-right: 48px; }
-section.split .columns > div + div { padding: 0 0 0 48px; border-left: 1px solid var(--line); }
-
-/* list：記事一覧と同じ 3 列の行（日付・タイトル・タグ） */
+/* ==== 部品 ==== */
+/* 等幅の番号ラベル＋罫線（章扉など）。先頭に朝焼けの短い線 */
+.label { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; font-family: var(--font-mono); font-size: 20px; letter-spacing: 0.035em; color: var(--ink); }
+.label::before { content: ""; width: 24px; height: 3px; background: var(--sunrise); }
+.label::after { content: ""; flex: 1; height: 1px; background: currentColor; }
+/* 図: 箱と矢印 */
+.flow { display: flex; align-items: center; justify-content: center; gap: 20px; margin: 40px 0 24px; }
+.flow .box { min-width: 150px; padding: 18px 20px; border: 1px solid var(--accent); border-radius: var(--radius-md); color: var(--accent); font-family: var(--font-mono); font-size: 20px; text-align: center; }
+.flow .box.strong { background: var(--accent); color: var(--paper); }
+.flow .box.sun { border-color: var(--sunrise); color: var(--sunrise); }
+.flow .arrow { color: var(--muted); font-size: 28px; }
+.flow + p { text-align: center; }
+/* 大きな数字 */
+.kpi { display: flex; gap: 48px; margin: 24px 0; }
+.kpi > div { min-width: 220px; padding-top: 12px; border-top: 1px solid var(--line); }
+.kpi b { display: block; font-family: var(--font-mono); font-weight: 500; font-size: 52px; line-height: 1.2; color: var(--accent); }
+.kpi b small { font-size: 24px; color: inherit; }
+.kpi span { font-size: 20px; color: var(--muted); }
+/* 記事行: 日付・タイトル・タグ */
 section .rows { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--line); }
-section .rows li {
-	display: grid;
-	grid-template-columns: 180px 1fr auto;
-	gap: 32px;
-	align-items: baseline;
-	margin: 0;
-	padding: 18px 0;
-	border-bottom: 1px solid var(--line);
-}
-section .rows time, section .rows .k { font-family: var(--font-mono); font-size: 20px; color: var(--muted); }
+section .rows li { display: grid; grid-template-columns: 180px 1fr auto; gap: 32px; align-items: baseline; margin: 0; padding: 18px 0; border-bottom: 1px solid var(--line); }
+section .rows time { font-family: var(--font-mono); font-size: 20px; color: var(--muted); }
 section .rows b { font-weight: 600; }
 section .rows .tags { font-size: 18px; }
 
-/* end：締め。中央に名前とリンク */
-section.end { justify-content: center; align-items: center; text-align: center; }
-section.end h2 { border: 0; padding: 0; margin: 0 0 16px; font-size: 48px; }
-section.end p { color: var(--muted); }
-section.end img.avatar {
-	width: 120px;
-	height: 120px;
-	object-fit: contain;
-	border: 1px solid var(--line);
-	border-radius: var(--radius-md);
-	background: var(--paper);
-	margin: 0 auto 24px;
-}
+/* ==== 白い板のスライドの型 ==== */
+/* 用語: 等幅の大きな英字＋読み */
+section.term h1 { font-family: var(--font-mono); font-size: 56px; font-weight: 500; letter-spacing: 0; line-height: 1.3; }
+section.term h1 + p { margin: 0 0 24px; color: var(--muted); font-size: 22px; }
+/* 2 カラム（間に縦罫線） */
+section.split .columns { display: grid; grid-template-columns: 1fr 1fr; flex: 1; min-height: 0; }
+section.split .columns > div { padding-right: 48px; }
+section.split .columns > div + div { padding: 0 0 0 48px; border-left: 1px solid var(--line); }
+/* 一言のまとめ（中央揃え） */
+section.center { justify-content: center; align-items: center; text-align: center; }
 
-/* 見出し直後は余白を重ねない */
-h2 + pre, h2 + .code-title, h2 + table, h2 + .callout, h2 + ul, h2 + ol { margin-top: 0; }
+/* ==== 冬空の全面スライド ==== */
+section:is(.title, .chapter, .keyword, .quote, .end) { background-color: var(--accent); color: var(--paper); }
+section:is(.title, .chapter, .keyword, .quote, .end)::before { display: none; }
+section:is(.title, .chapter, .keyword, .quote, .end) :is(h1, h2, h3, p, a, blockquote, footer, .label, .tags, time) { color: var(--paper); }
+section:is(.title, .chapter, .keyword, .quote, .end)::after { color: var(--paper); }
+section:is(.title, .end)::after { display: none; }
+
+/* 表紙: 左上にタイトル、下に八ヶ岳連峰の稜線（等高線 2 本つき） */
+section.title {
+	padding: 120px 88px 64px;
+	/* motif:yatsugatake-cover */ background-image: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201280%20720%22%20width%3D%221280%22%20height%3D%22720%22%3E%3Cpath%20d%3D%22M0.0%2C480.0%20C11.2%2C482.7%2047.2%2C494.0%2067.2%2C496.5%20C87.2%2C499.1%20108.1%2C496.3%20119.8%2C495.3%20C131.5%2C494.4%20130.0%2C493.5%20137.4%2C490.9%20C144.7%2C488.4%20154.9%2C482.4%20163.7%2C480.2%20C172.4%2C478.1%20183.6%2C478.0%20190.0%2C477.9%20C196.3%2C477.7%20196.3%2C477.7%20201.6%2C479.5%20C207.0%2C481.4%20217.2%2C487.1%20222.1%2C488.9%20C227.0%2C490.7%20223.6%2C492.2%20230.9%2C490.3%20C238.2%2C488.4%20254.7%2C479.4%20265.9%2C477.5%20C277.1%2C475.7%20290.3%2C478.4%20298.1%2C479.2%20C305.9%2C480.0%20306.8%2C480.1%20312.7%2C482.2%20C318.5%2C484.2%20328.3%2C489.8%20333.2%2C491.5%20C338.0%2C493.3%20335.1%2C492.8%20341.9%2C492.4%20C348.7%2C492.1%20363.8%2C493.0%20374.1%2C489.6%20C384.3%2C486.2%20396.5%2C475.4%20403.3%2C472.0%20C410.1%2C468.6%20408.2%2C466.8%20415.0%2C469.0%20C421.8%2C471.2%20434.0%2C482.4%20444.2%2C485.5%20C454.4%2C488.5%20466.1%2C483.7%20476.3%2C487.5%20C486.6%2C491.3%20499.2%2C504.4%20505.6%2C508.4%20C511.9%2C512.3%20511.4%2C511.4%20514.3%2C511.3%20C517.3%2C511.2%20518.7%2C511.4%20523.1%2C507.7%20C527.5%2C504.0%20536.3%2C493.0%20540.6%2C489.2%20C545.0%2C485.4%20543.1%2C484.7%20549.4%2C484.9%20C555.7%2C485.1%20568.9%2C490.1%20578.6%2C490.6%20C588.4%2C491.1%20598.1%2C488.0%20607.9%2C488.0%20C617.6%2C487.9%20628.3%2C489.3%20637.1%2C490.6%20C645.8%2C491.8%20653.2%2C492.9%20660.5%2C495.5%20C667.8%2C498.2%20676.0%2C504.2%20680.9%2C506.4%20C685.8%2C508.6%20686.3%2C508.8%20689.7%2C508.7%20C693.1%2C508.6%20695.5%2C509.4%20701.4%2C505.8%20C707.2%2C502.2%20718.4%2C490.7%20724.7%2C487.1%20C731.1%2C483.4%20734.5%2C483.3%20739.4%2C484.0%20C744.2%2C484.6%20747.6%2C485.6%20754.0%2C490.8%20C760.3%2C496.0%20768.1%2C509.3%20777.4%2C515.3%20C786.6%2C521.2%20799.8%2C524.5%20809.5%2C526.7%20C819.2%2C528.9%20823.6%2C531.1%20835.8%2C528.7%20C848.0%2C526.3%20873.3%2C514.6%20882.6%2C512.1%20C891.8%2C509.7%20882.6%2C509.7%20891.3%2C514.0%20C900.1%2C518.3%20926.4%2C533.9%20935.2%2C537.9%20C943.9%2C542.0%20939.1%2C539.5%20943.9%2C538.0%20C948.8%2C536.6%20959.0%2C530.7%20964.4%2C529.4%20C969.7%2C528.0%20972.7%2C529.0%20976.1%2C529.9%20C979.5%2C530.9%20979.5%2C530.6%20984.8%2C535.1%20C990.2%2C539.7%20998.5%2C549.2%201008.2%2C557.0%20C1018.0%2C564.7%201028.2%2C569.7%201043.3%2C581.8%20C1058.4%2C593.8%201080.8%2C616.3%201098.8%2C629.3%20C1116.8%2C642.3%201138.8%2C653.0%201151.4%2C659.8%20C1164.1%2C666.5%201167.5%2C667.1%201174.8%2C669.6%20C1182.1%2C672.1%201186.0%2C672.9%201195.3%2C674.8%20C1204.5%2C676.7%201216.2%2C679.4%201230.3%2C681.0%20C1244.4%2C682.5%201271.7%2C683.5%201280.0%2C684.0%22%20fill%3D%22none%22%20stroke%3D%22%23ffffff%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M0.0%2C573.1%20C15.1%2C574.7%2060.4%2C582.5%2090.6%2C582.4%20C120.8%2C582.2%20157.8%2C573.1%20181.2%2C572.2%20C204.6%2C571.3%20213.3%2C577.0%20230.9%2C576.9%20C248.4%2C576.8%20265.9%2C571.4%20286.4%2C571.8%20C306.8%2C572.2%20332.2%2C580.0%20353.6%2C579.5%20C375.0%2C579.0%20388.7%2C567.3%20415.0%2C568.7%20C441.3%2C570.2%20487.5%2C586.6%20511.4%2C588.1%20C535.3%2C589.6%20538.7%2C579.4%20558.2%2C577.9%20C577.7%2C576.3%20606.4%2C577.2%20628.3%2C578.9%20C650.2%2C580.5%20671.2%2C588.0%20689.7%2C587.8%20C708.2%2C587.7%20719.4%2C576.0%20739.4%2C578.2%20C759.3%2C580.5%20793.9%2C597.4%20809.5%2C601.4%20C825.1%2C605.4%20820.7%2C603.2%20832.9%2C602.3%20C845.1%2C601.3%20866.0%2C594.8%20882.6%2C595.5%20C899.1%2C596.3%20916.7%2C604.8%20932.2%2C606.7%20C947.8%2C608.7%20947.8%2C597.1%20976.1%2C607.3%20C1004.3%2C617.5%201073.0%2C655.1%201101.7%2C668.1%20C1130.5%2C681.2%201131.4%2C680.7%201148.5%2C685.6%20C1165.5%2C690.4%201182.1%2C694.6%201204.0%2C697.3%20C1225.9%2C700.1%201267.3%2C701.2%201280.0%2C702.0%22%20fill%3D%22none%22%20stroke%3D%22%2386a3c9%22%20stroke-width%3D%221.25%22%2F%3E%3Cpath%20d%3D%22M0.0%2C648.6%20C14.1%2C649.3%2015.6%2C653.2%2084.7%2C653.0%20C153.9%2C652.7%20344.4%2C646.9%20415.0%2C647.2%20C485.6%2C647.5%20454.4%2C653.6%20508.5%2C654.5%20C562.6%2C655.5%20688.7%2C651.5%20739.4%2C652.8%20C790.0%2C654.1%20788.1%2C661.1%20812.4%2C662.6%20C836.8%2C664.0%20858.2%2C660.5%20885.5%2C661.3%20C912.8%2C662.1%20932.2%2C660.0%20976.1%2C667.6%20C1019.9%2C675.3%201097.8%2C699.1%201148.5%2C707.2%20C1199.1%2C715.2%201258.1%2C714.5%201280.0%2C716.0%22%20fill%3D%22none%22%20stroke%3D%22%2386a3c9%22%20stroke-width%3D%221%22%2F%3E%3C%2Fsvg%3E");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 100% 100%;
+}
+section.title h1 { font-size: 60px; margin-bottom: 28px; }
+section.title p { margin: 0; font-size: 24px; }
+
+/* 章扉: 左上に番号と見出し、右に蓼科山 */
+section.chapter {
+	padding-top: 150px;
+	/* motif:tateshina */ background-image: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201280%20720%22%20width%3D%221280%22%20height%3D%22720%22%3E%3Cpath%20d%3D%22M330.0%2C720.0%20C340.3%2C717.8%20378.4%2C710.3%20391.6%2C707.0%20C404.8%2C703.6%20404.0%2C702.7%20409.2%2C699.8%20C414.3%2C696.9%20412.8%2C698.8%20422.4%2C689.5%20C431.9%2C680.3%20450.2%2C659.4%20466.3%2C644.6%20C482.5%2C629.8%20507.4%2C610.1%20519.1%2C600.7%20C530.8%2C591.4%20524.3%2C595.8%20536.7%2C588.5%20C549.2%2C581.2%20581.4%2C562.8%20593.9%2C556.9%20C606.4%2C551.0%20595.4%2C553.4%20611.5%2C553.1%20C627.6%2C552.7%20674.5%2C555.8%20690.6%2C555.0%20C706.8%2C554.1%20701.6%2C552.3%20708.2%2C547.9%20C714.8%2C543.6%20718.5%2C540.9%20730.2%2C529.0%20C742.0%2C517.0%20755.9%2C497.3%20778.6%2C476.5%20C801.3%2C455.7%20838.7%2C433.6%20866.6%2C404.2%20C894.4%2C374.8%20928.9%2C320.7%20945.7%2C300.0%20C962.6%2C279.4%20961.1%2C285.1%20967.7%2C280.4%20C974.3%2C275.7%20979.5%2C273.6%20985.3%2C271.9%20C991.2%2C270.2%20997.1%2C270.0%201002.9%2C270.1%20C1008.8%2C270.2%201012.4%2C270.8%201020.5%2C272.5%20C1028.6%2C274.3%201043.2%2C278.0%201051.3%2C280.8%20C1059.4%2C283.6%201063.0%2C285.3%201068.9%2C289.3%20C1074.8%2C293.3%201069.6%2C286.8%201086.5%2C304.6%20C1103.3%2C322.4%201152.5%2C377.8%201170.0%2C396.2%20C1187.6%2C414.6%201185.4%2C410.0%201192.0%2C415.0%20C1198.6%2C419.9%201205.2%2C423.6%201209.6%2C425.8%20C1214.0%2C427.9%201214.8%2C427.8%201218.4%2C427.9%20C1222.1%2C428.1%201223.6%2C430.0%201231.6%2C426.9%20C1239.7%2C423.8%201258.7%2C413.0%201266.8%2C409.4%20C1274.9%2C405.8%201277.8%2C405.9%201280.0%2C405.2%20L1280%2C405.2%20L1280%2C720%20L330.0%2C720%20Z%22%20fill%3D%22%231d4577%22%2F%3E%3Cpath%20d%3D%22M330.0%2C720.0%20C340.3%2C717.8%20378.4%2C710.3%20391.6%2C707.0%20C404.8%2C703.6%20404.0%2C702.7%20409.2%2C699.8%20C414.3%2C696.9%20412.8%2C698.8%20422.4%2C689.5%20C431.9%2C680.3%20450.2%2C659.4%20466.3%2C644.6%20C482.5%2C629.8%20507.4%2C610.1%20519.1%2C600.7%20C530.8%2C591.4%20524.3%2C595.8%20536.7%2C588.5%20C549.2%2C581.2%20581.4%2C562.8%20593.9%2C556.9%20C606.4%2C551.0%20595.4%2C553.4%20611.5%2C553.1%20C627.6%2C552.7%20674.5%2C555.8%20690.6%2C555.0%20C706.8%2C554.1%20701.6%2C552.3%20708.2%2C547.9%20C714.8%2C543.6%20718.5%2C540.9%20730.2%2C529.0%20C742.0%2C517.0%20755.9%2C497.3%20778.6%2C476.5%20C801.3%2C455.7%20838.7%2C433.6%20866.6%2C404.2%20C894.4%2C374.8%20928.9%2C320.7%20945.7%2C300.0%20C962.6%2C279.4%20961.1%2C285.1%20967.7%2C280.4%20C974.3%2C275.7%20979.5%2C273.6%20985.3%2C271.9%20C991.2%2C270.2%20997.1%2C270.0%201002.9%2C270.1%20C1008.8%2C270.2%201012.4%2C270.8%201020.5%2C272.5%20C1028.6%2C274.3%201043.2%2C278.0%201051.3%2C280.8%20C1059.4%2C283.6%201063.0%2C285.3%201068.9%2C289.3%20C1074.8%2C293.3%201069.6%2C286.8%201086.5%2C304.6%20C1103.3%2C322.4%201152.5%2C377.8%201170.0%2C396.2%20C1187.6%2C414.6%201185.4%2C410.0%201192.0%2C415.0%20C1198.6%2C419.9%201205.2%2C423.6%201209.6%2C425.8%20C1214.0%2C427.9%201214.8%2C427.8%201218.4%2C427.9%20C1222.1%2C428.1%201223.6%2C430.0%201231.6%2C426.9%20C1239.7%2C423.8%201258.7%2C413.0%201266.8%2C409.4%20C1274.9%2C405.8%201277.8%2C405.9%201280.0%2C405.2%22%20fill%3D%22none%22%20stroke%3D%22%23ffffff%22%20stroke-width%3D%222.5%22%20stroke-linecap%3D%22round%22%2F%3E%3C%2Fsvg%3E");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 100% 100%;
+}
+section.chapter > * { max-width: 640px; }
+section.chapter h2 { font-size: 56px; font-weight: 700; margin: 0; }
+section.chapter p { margin-top: 16px; }
+
+/* キーワード 1 語（中央・大） */
+section.keyword { justify-content: center; align-items: center; text-align: center; }
+section.keyword h1 { font-size: 72px; font-weight: 700; letter-spacing: -0.035em; }
+section.keyword p { margin-top: 8px; font-size: 24px; }
+
+/* 引用 */
+section.quote { justify-content: center; padding: 64px 120px; }
+section.quote blockquote { border-left-color: var(--paper); font-size: 30px; line-height: 1.8; padding: 4px 36px; margin: 0; }
+section.quote blockquote p + p { margin-top: 24px; font-size: 20px; font-family: var(--font-mono); }
+
+/* 締め: 左にアバターと名前、右に蓼科山 */
+section.end {
+	justify-content: center;
+	padding-left: 120px;
+	/* motif:tateshina */ background-image: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201280%20720%22%20width%3D%221280%22%20height%3D%22720%22%3E%3Cpath%20d%3D%22M330.0%2C720.0%20C340.3%2C717.8%20378.4%2C710.3%20391.6%2C707.0%20C404.8%2C703.6%20404.0%2C702.7%20409.2%2C699.8%20C414.3%2C696.9%20412.8%2C698.8%20422.4%2C689.5%20C431.9%2C680.3%20450.2%2C659.4%20466.3%2C644.6%20C482.5%2C629.8%20507.4%2C610.1%20519.1%2C600.7%20C530.8%2C591.4%20524.3%2C595.8%20536.7%2C588.5%20C549.2%2C581.2%20581.4%2C562.8%20593.9%2C556.9%20C606.4%2C551.0%20595.4%2C553.4%20611.5%2C553.1%20C627.6%2C552.7%20674.5%2C555.8%20690.6%2C555.0%20C706.8%2C554.1%20701.6%2C552.3%20708.2%2C547.9%20C714.8%2C543.6%20718.5%2C540.9%20730.2%2C529.0%20C742.0%2C517.0%20755.9%2C497.3%20778.6%2C476.5%20C801.3%2C455.7%20838.7%2C433.6%20866.6%2C404.2%20C894.4%2C374.8%20928.9%2C320.7%20945.7%2C300.0%20C962.6%2C279.4%20961.1%2C285.1%20967.7%2C280.4%20C974.3%2C275.7%20979.5%2C273.6%20985.3%2C271.9%20C991.2%2C270.2%20997.1%2C270.0%201002.9%2C270.1%20C1008.8%2C270.2%201012.4%2C270.8%201020.5%2C272.5%20C1028.6%2C274.3%201043.2%2C278.0%201051.3%2C280.8%20C1059.4%2C283.6%201063.0%2C285.3%201068.9%2C289.3%20C1074.8%2C293.3%201069.6%2C286.8%201086.5%2C304.6%20C1103.3%2C322.4%201152.5%2C377.8%201170.0%2C396.2%20C1187.6%2C414.6%201185.4%2C410.0%201192.0%2C415.0%20C1198.6%2C419.9%201205.2%2C423.6%201209.6%2C425.8%20C1214.0%2C427.9%201214.8%2C427.8%201218.4%2C427.9%20C1222.1%2C428.1%201223.6%2C430.0%201231.6%2C426.9%20C1239.7%2C423.8%201258.7%2C413.0%201266.8%2C409.4%20C1274.9%2C405.8%201277.8%2C405.9%201280.0%2C405.2%20L1280%2C405.2%20L1280%2C720%20L330.0%2C720%20Z%22%20fill%3D%22%231d4577%22%2F%3E%3Cpath%20d%3D%22M330.0%2C720.0%20C340.3%2C717.8%20378.4%2C710.3%20391.6%2C707.0%20C404.8%2C703.6%20404.0%2C702.7%20409.2%2C699.8%20C414.3%2C696.9%20412.8%2C698.8%20422.4%2C689.5%20C431.9%2C680.3%20450.2%2C659.4%20466.3%2C644.6%20C482.5%2C629.8%20507.4%2C610.1%20519.1%2C600.7%20C530.8%2C591.4%20524.3%2C595.8%20536.7%2C588.5%20C549.2%2C581.2%20581.4%2C562.8%20593.9%2C556.9%20C606.4%2C551.0%20595.4%2C553.4%20611.5%2C553.1%20C627.6%2C552.7%20674.5%2C555.8%20690.6%2C555.0%20C706.8%2C554.1%20701.6%2C552.3%20708.2%2C547.9%20C714.8%2C543.6%20718.5%2C540.9%20730.2%2C529.0%20C742.0%2C517.0%20755.9%2C497.3%20778.6%2C476.5%20C801.3%2C455.7%20838.7%2C433.6%20866.6%2C404.2%20C894.4%2C374.8%20928.9%2C320.7%20945.7%2C300.0%20C962.6%2C279.4%20961.1%2C285.1%20967.7%2C280.4%20C974.3%2C275.7%20979.5%2C273.6%20985.3%2C271.9%20C991.2%2C270.2%20997.1%2C270.0%201002.9%2C270.1%20C1008.8%2C270.2%201012.4%2C270.8%201020.5%2C272.5%20C1028.6%2C274.3%201043.2%2C278.0%201051.3%2C280.8%20C1059.4%2C283.6%201063.0%2C285.3%201068.9%2C289.3%20C1074.8%2C293.3%201069.6%2C286.8%201086.5%2C304.6%20C1103.3%2C322.4%201152.5%2C377.8%201170.0%2C396.2%20C1187.6%2C414.6%201185.4%2C410.0%201192.0%2C415.0%20C1198.6%2C419.9%201205.2%2C423.6%201209.6%2C425.8%20C1214.0%2C427.9%201214.8%2C427.8%201218.4%2C427.9%20C1222.1%2C428.1%201223.6%2C430.0%201231.6%2C426.9%20C1239.7%2C423.8%201258.7%2C413.0%201266.8%2C409.4%20C1274.9%2C405.8%201277.8%2C405.9%201280.0%2C405.2%22%20fill%3D%22none%22%20stroke%3D%22%23ffffff%22%20stroke-width%3D%222.5%22%20stroke-linecap%3D%22round%22%2F%3E%3C%2Fsvg%3E");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 100% 100%;
+}
+section.end > * { max-width: 520px; }
+section.end h2 { font-size: 48px; font-weight: 700; margin: 0 0 8px; }
+section.end p { margin: 0 0 8px; }
+section.end img.avatar { width: 120px; height: 120px; object-fit: contain; margin: 0 0 24px; border: 1px solid var(--paper); border-radius: var(--radius-md); background: var(--paper); }

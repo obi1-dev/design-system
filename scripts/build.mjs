@@ -3,6 +3,7 @@
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { injectMotifs, motifPaths, motifSvgs } from "./motifs.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const src = (p) => join(root, "src", p);
@@ -38,6 +39,7 @@ const decl = (pairs, prefix = "") => pairs.map(([n, v]) => `\t--${prefix}${n}: $
 const fontDecl = families.map(([k, v]) => `\t--font-${k}: ${v};`).join("\n");
 
 mkdirSync(dist("marp"), { recursive: true });
+mkdirSync(dist("motifs"), { recursive: true });
 
 // ---- dist/fonts.css ----
 const GOOGLE_FONTS =
@@ -140,7 +142,30 @@ ${decl(colors)}
 ${fontDecl}
 ${decl(radius)}
 }`;
-writeFileSync(dist("marp/obi1.css"), marp.replace(rootRe, marpRoot));
+// ---- motifs: 八ヶ岳連峰の稜線・蓼科山のシルエット（src/assets/Mountains/*.svg） ----
+const paths = {
+	yatsugatake: motifPaths(readFileSync(src("assets/Mountains/yatsugatake.svg"), "utf8")),
+	tateshina: motifPaths(readFileSync(src("assets/Mountains/tateshina.svg"), "utf8")),
+};
+for (const [name, need] of Object.entries({ yatsugatake: ["ridge", "contour-1", "contour-2"], tateshina: ["shape", "ridge"] })) {
+	for (const id of need) if (!paths[name][id]) throw new Error(`motif ${name} has no path #${id}`);
+}
+const colorMap = Object.fromEntries(colors);
+const themed = motifSvgs(paths, colorMap);
+for (const [name, svgText] of Object.entries(themed)) writeFileSync(dist(`motifs/${name}.svg`), `${svgText}\n`);
+for (const name of Object.keys(paths)) writeFileSync(dist(`motifs/${name}-source.svg`), readFileSync(src(`assets/Mountains/${name}.svg`)));
+const motifData = { viewBox: "0 0 1280 720", width: 1280, height: 720, ...paths };
+const motifJson = JSON.stringify(motifData, null, "\t");
+writeFileSync(
+	dist("motifs.js"),
+	`${banner()}\n// path data on a 1280×720 canvas. yatsugatake: ridge / contour-1 / contour-2, tateshina: shape (filled) / ridge\nexport const motifs = ${motifJson};\nexport default motifs;\n`,
+);
+writeFileSync(
+	dist("motifs.d.ts"),
+	`${banner()}\nexport declare const motifs: {\n\treadonly viewBox: string;\n\treadonly width: number;\n\treadonly height: number;\n\treadonly yatsugatake: { readonly ridge: string; readonly "contour-1": string; readonly "contour-2": string };\n\treadonly tateshina: { readonly shape: string; readonly ridge: string };\n};\nexport default motifs;\n`,
+);
+
+writeFileSync(dist("marp/obi1.css"), injectMotifs(marp.replace(rootRe, marpRoot), themed));
 writeFileSync(dist("marp/template.md"), readFileSync(src("assets/Marp/template.md")));
 writeFileSync(dist("marp/obi1-profile.png"), readFileSync(src("assets/Profile/obi1-profile.png")));
 

@@ -1,13 +1,18 @@
-/* obi1.dev design system v1.0.0 — generated from src/tokens.json. Do not edit. */
+/* obi1.dev design system v1.1.0 — generated from src/tokens.json. Do not edit. */
 export declare const tokens: {
 	readonly "name": "obi1.dev",
-	readonly "version": "1.0.0",
+	readonly "version": "1.1.0",
 	readonly "color": {
 		readonly "paper": "#ffffff",
 		readonly "surface": "#f5f6f6",
 		readonly "ink": "#222322",
 		readonly "muted": "#646965",
-		readonly "accent": "#39566b",
+		readonly "accent": "#24538f",
+		readonly "accent-deep": "#1d4577",
+		readonly "accent-faint": "#86a3c9",
+		readonly "forest": "#34503f",
+		readonly "snow": "#eef2f6",
+		readonly "sunrise": "#a85f3f",
 		readonly "line": "#d8dcda",
 		readonly "line-strong": "#a6b0b5",
 		readonly "code-bg": "#edf1f3",
