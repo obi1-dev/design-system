@@ -158,11 +158,11 @@ const motifData = { viewBox: "0 0 1280 720", width: 1280, height: 720, ...paths 
 const motifJson = JSON.stringify(motifData, null, "\t");
 writeFileSync(
 	dist("motifs.js"),
-	`${banner()}\n// path data on a 1280×720 canvas. yatsugatake: ridge / contour-1 / contour-2, tateshina: shape (filled) / ridge\nexport const motifs = ${motifJson};\nexport default motifs;\n`,
+	`${banner()}\n// path data on a 1280×720 canvas. yatsugatake: ridge / contour-1 / contour-2 / shape / snow, tateshina: shape / shade / snow / ridge\nexport const motifs = ${motifJson};\n// SVG documents colored with the tokens — the same ones the Marp theme uses (on an accent background)\nexport const motifSvgs = ${JSON.stringify(themed, null, "\t")};\nexport default motifs;\n`,
 );
 writeFileSync(
 	dist("motifs.d.ts"),
-	`${banner()}\nexport declare const motifs: {\n\treadonly viewBox: string;\n\treadonly width: number;\n\treadonly height: number;\n\treadonly yatsugatake: { readonly ridge: string; readonly "contour-1": string; readonly "contour-2": string };\n\treadonly tateshina: { readonly shape: string; readonly ridge: string };\n};\nexport default motifs;\n`,
+	`${banner()}\nexport declare const motifs: {\n\treadonly viewBox: string;\n\treadonly width: number;\n\treadonly height: number;\n\treadonly yatsugatake: { readonly ridge: string; readonly "contour-1": string; readonly "contour-2": string; readonly shape?: string; readonly snow?: string };\n\treadonly tateshina: { readonly shape: string; readonly ridge: string; readonly shade?: string; readonly snow?: string };\n};\nexport declare const motifSvgs: { readonly "yatsugatake-cover": string; readonly tateshina: string };\nexport default motifs;\n`,
 );
 
 writeFileSync(dist("marp/obi1.css"), injectMotifs(marp.replace(rootRe, marpRoot), themed));

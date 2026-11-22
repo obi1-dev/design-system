@@ -13,16 +13,27 @@ const svg = (body) =>
 	`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">${body}</svg>`;
 
 export function motifSvgs({ yatsugatake, tateshina }, color) {
+	const fill = (d, c, extra = "") => (d ? `<path d="${d}" fill="${c}"${extra}/>` : "");
+	// 山肌（陰・雪）は山の形の内側だけに描く
+	const clipped = (id, shape, body) =>
+		shape && body ? `<clipPath id="${id}-clip"><path d="${shape}"/></clipPath><g clip-path="url(#${id}-clip)">${body}</g>` : body;
 	return {
-		// 表紙: 白い稜線と、淡い等高線 2 本
+		// 表紙: 山肌を一段深い冬空で塗り、等高線・雪の冠・白い稜線を重ねる
 		"yatsugatake-cover": svg(
-			`<path d="${yatsugatake.ridge}" fill="none" stroke="${color.paper}" stroke-width="2" stroke-linecap="round"/>` +
+			fill(yatsugatake.shape, color["accent-deep"]) +
 				`<path d="${yatsugatake["contour-1"]}" fill="none" stroke="${color["accent-faint"]}" stroke-width="1.25"/>` +
-				`<path d="${yatsugatake["contour-2"]}" fill="none" stroke="${color["accent-faint"]}" stroke-width="1"/>`,
+				`<path d="${yatsugatake["contour-2"]}" fill="none" stroke="${color["accent-faint"]}" stroke-width="1"/>` +
+				clipped("yatsugatake", yatsugatake.shape, fill(yatsugatake.snow, color.snow)) +
+				`<path d="${yatsugatake.ridge}" fill="none" stroke="${color.paper}" stroke-width="2" stroke-linecap="round"/>`,
 		),
-		// 章扉・締め: 一段深い冬空で塗り、稜線を白でなぞる
+		// 章扉・締め・OG: 一段深い冬空で塗り、陰の面・雪の冠・白い稜線を重ねる
 		tateshina: svg(
-			`<path d="${tateshina.shape}" fill="${color["accent-deep"]}"/>` +
+			fill(tateshina.shape, color["accent-deep"]) +
+				clipped(
+					"tateshina",
+					tateshina.shape,
+					fill(tateshina.shade, color.ink, ' fill-opacity="0.22"') + fill(tateshina.snow, color.snow),
+				) +
 				`<path d="${tateshina.ridge}" fill="none" stroke="${color.paper}" stroke-width="2.5" stroke-linecap="round"/>`,
 		),
 	};

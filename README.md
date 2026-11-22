@@ -38,7 +38,7 @@ obi1.dev ／ スライド ／ ポートフォリオ …
 | `@obi1-dev/design-system/tailwind.css` | Tailwind CSS v4 の `@theme`（`bg-paper` `text-ink` `font-mono` `rounded-md` `max-tablet:` …）と CSS 変数 |
 | `@obi1-dev/design-system/fonts.css` | Google Fonts の読み込み（Inter / Noto Sans JP / JetBrains Mono） |
 | `@obi1-dev/design-system/tokens.json` | トークンの値（JSON） |
-| `@obi1-dev/design-system/motifs` | 山のモチーフのパスデータ（JS + 型）。1280×720 の座標で、八ヶ岳 `ridge`・`contour-1`・`contour-2`、蓼科山 `shape`・`ridge` |
+| `@obi1-dev/design-system/motifs` | 山のモチーフ（JS + 型）。`motifs` は 1280×720 の座標のパス（八ヶ岳 `shape`・`snow`・`ridge`・`contour-1`・`contour-2`、蓼科山 `shape`・`shade`・`snow`・`ridge`）、`motifSvgs` は冬空の地に置く色付け済みの SVG 文字列 |
 | `@obi1-dev/design-system/motifs/*.svg` | トークンの色で塗った完成形の SVG（`yatsugatake-cover.svg`・`tateshina.svg`）と元データ（`*-source.svg`） |
 | `@obi1-dev/design-system/marp/obi1.css` | Marp テーマ。`:root` と山のモチーフの背景はトークンとモチーフから生成 |
 | `@obi1-dev/design-system/marp/template.md` | Marp のサンプル 12 枚（`obi1-profile.png` も同梱） |
@@ -65,9 +65,10 @@ Tailwind v4 のプロジェクト:
 
 ```ts
 import { tokens } from "@obi1-dev/design-system";
-import { motifs } from "@obi1-dev/design-system/motifs";
+import { motifs, motifSvgs } from "@obi1-dev/design-system/motifs";
 tokens.color.accent; // "#24538f"（冬空）
 motifs.tateshina.shape; // 蓼科山のシルエットの path（viewBox は motifs.viewBox）
+motifSvgs.tateshina; // 色付け済みの SVG（OG 画像などにそのまま使える）
 ```
 
 Marp:

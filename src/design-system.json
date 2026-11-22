@@ -33,15 +33,15 @@
     "OG": {
       "files": {
         "og-home.png": {
-          "blob": "1a51184c1e82f7712a19cfd7a276ef6a",
+          "blob": "2cb642e874af69fabea3455bffb84588",
           "name": "og-home.png",
-          "size": 33503,
+          "size": 36567,
           "type": "image/png"
         },
         "og-article.png": {
-          "blob": "130037bd476c35c1b388dece2e0f03ed",
+          "blob": "5569ef17d2168d65b91713550632f20d",
           "name": "og-article.png",
-          "size": 42742,
+          "size": 45738,
           "type": "image/png"
         }
       },
@@ -87,8 +87,8 @@
       "files": {
         "slide-01.png": {
           "name": "slide-01.png",
-          "blob": "17abc85a075894ad9059a2fdfde5df15",
-          "size": 104577,
+          "blob": "00d990878aa4a5e5bd1fd0c91f1ae4e4",
+          "size": 110065,
           "type": "image/png"
         },
         "slide-02.png": {
@@ -99,8 +99,8 @@
         },
         "slide-03.png": {
           "name": "slide-03.png",
-          "blob": "f49e5e57b828bde845a60511b74a1f0b",
-          "size": 64969,
+          "blob": "06c2f8b8177af65b1cc2d9a6a5e7c8d3",
+          "size": 68467,
           "type": "image/png"
         },
         "slide-04.png": {
@@ -153,8 +153,8 @@
         },
         "slide-12.png": {
           "name": "slide-12.png",
-          "blob": "2d0d06327107a41770e45e9ec765e3c0",
-          "size": 59075,
+          "blob": "481a08982e0245aad48009253724c2ca",
+          "size": 62711,
           "type": "image/png"
         }
       }
@@ -169,14 +169,14 @@
       "files": {
         "yatsugatake.svg": {
           "name": "yatsugatake.svg",
-          "blob": "0caca896c56ac4d6df65da0c945ab26a",
-          "size": 3484,
+          "blob": "6616214e8833cfa8b99d165468d016df",
+          "size": 9785,
           "type": "image/svg+xml"
         },
         "tateshina.svg": {
           "name": "tateshina.svg",
-          "blob": "f540c0b7cc506151c464873382a84227",
-          "size": 2507,
+          "blob": "7e2b3f81c78af3ec4064ff47c5b4c1b2",
+          "size": 4429,
           "type": "image/svg+xml"
         }
       }
@@ -200,9 +200,9 @@
   ],
   "lastChange": {
     "by": "Claude",
-    "at": "2026-11-21T07:20:00Z",
+    "at": "2026-11-22T01:15:00Z",
     "via": "Claude Code",
-    "note": "ブランドを「冬空と稜線」に: accent を冬空 #24538f に、森・雪・朝焼けなどを追加。八ヶ岳・蓼科山のモチーフ、Marp テーマ・OG 画像を更新"
+    "note": "山のモチーフに山肌を追加: 八ヶ岳は塗りと峰の雪、蓼科山は雪の冠と右斜面の陰。表紙・章扉・締めのスライドと OG 画像を更新"
   },
   "layout": "files",
   "libraries": [],
