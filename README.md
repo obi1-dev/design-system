@@ -1,6 +1,6 @@
 # obi1 design system
 
-obi1.dev とその周辺のプロダクト（スライド、ポートフォリオなど）で共有するデザインシステム。方針は B「静かな編集室」：白地、墨の文字、アクセントは青灰 1 色、区切りは 1px の罫線。
+obi1.dev とその周辺のプロダクト（スライド、ポートフォリオなど）で共有するデザインシステム。骨格は「静かな編集室」（白地、墨の文字、1px の罫線）、ブランドは「冬空と稜線」（冬空の青を主役に森・雪・朝焼け、八ヶ岳連峰と蓼科山のモチーフ）。
 
 ## 正（source of truth）
 
@@ -38,8 +38,10 @@ obi1.dev ／ スライド ／ ポートフォリオ …
 | `@obi1-dev/design-system/tailwind.css` | Tailwind CSS v4 の `@theme`（`bg-paper` `text-ink` `font-mono` `rounded-md` `max-tablet:` …）と CSS 変数 |
 | `@obi1-dev/design-system/fonts.css` | Google Fonts の読み込み（Inter / Noto Sans JP / JetBrains Mono） |
 | `@obi1-dev/design-system/tokens.json` | トークンの値（JSON） |
-| `@obi1-dev/design-system/marp/obi1.css` | Marp テーマ。`:root` はトークンから生成 |
-| `@obi1-dev/design-system/marp/template.md` | Marp のサンプル 9 枚（`obi1-profile.png` も同梱） |
+| `@obi1-dev/design-system/motifs` | 山のモチーフ（JS + 型）。`motifs` は 1280×720 の座標のパス（八ヶ岳 `shape`・`snow`・`ridge`・`contour-1`・`contour-2`、蓼科山 `shape`・`shade`・`snow`・`ridge`）、`motifSvgs` は冬空の地に置く色付け済みの SVG 文字列 |
+| `@obi1-dev/design-system/motifs/*.svg` | トークンの色で塗った完成形の SVG（`yatsugatake-cover.svg`・`tateshina.svg`）と元データ（`*-source.svg`） |
+| `@obi1-dev/design-system/marp/obi1.css` | Marp テーマ。`:root` と山のモチーフの背景はトークンとモチーフから生成 |
+| `@obi1-dev/design-system/marp/template.md` | Marp のサンプル 12 枚（`obi1-profile.png` も同梱） |
 
 ブレークポイントのトークンは「以下」（`bp-tablet` = 1023px 以下）。Tailwind では `max-tablet:` / `max-mobile:` が同じ範囲になるよう、`@theme` には 1px 足した値を出しています。
 
@@ -63,7 +65,10 @@ Tailwind v4 のプロジェクト:
 
 ```ts
 import { tokens } from "@obi1-dev/design-system";
-tokens.color.accent; // "#39566b"
+import { motifs, motifSvgs } from "@obi1-dev/design-system/motifs";
+tokens.color.accent; // "#24538f"（冬空）
+motifs.tateshina.shape; // 蓼科山のシルエットの path（viewBox は motifs.viewBox）
+motifSvgs.tateshina; // 色付け済みの SVG（OG 画像などにそのまま使える）
 ```
 
 Marp:

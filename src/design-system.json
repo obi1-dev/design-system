@@ -32,16 +32,16 @@
     },
     "OG": {
       "files": {
-        "og-article.png": {
-          "blob": "f435162708326c902ee57f462d200abc",
-          "name": "og-article.png",
-          "size": 42203,
+        "og-home.png": {
+          "blob": "2cb642e874af69fabea3455bffb84588",
+          "name": "og-home.png",
+          "size": 36567,
           "type": "image/png"
         },
-        "og-home.png": {
-          "blob": "31e97539dee28ea7ddfcb0f510c430e5",
-          "name": "og-home.png",
-          "size": 25859,
+        "og-article.png": {
+          "blob": "5569ef17d2168d65b91713550632f20d",
+          "name": "og-article.png",
+          "size": 45738,
           "type": "image/png"
         }
       },
@@ -79,62 +79,105 @@
         "slide-06.png",
         "slide-07.png",
         "slide-08.png",
-        "slide-09.png"
+        "slide-09.png",
+        "slide-10.png",
+        "slide-11.png",
+        "slide-12.png"
       ],
       "files": {
         "slide-01.png": {
           "name": "slide-01.png",
-          "blob": "ead3601e1359e382588d998242063a86",
-          "size": 62888,
+          "blob": "00d990878aa4a5e5bd1fd0c91f1ae4e4",
+          "size": 110065,
           "type": "image/png"
         },
         "slide-02.png": {
           "name": "slide-02.png",
-          "blob": "a220a5b4ee9f2806cc5991038f6f5b40",
-          "size": 90179,
+          "blob": "a1b624d2574531495798713d00eb1696",
+          "size": 59758,
           "type": "image/png"
         },
         "slide-03.png": {
           "name": "slide-03.png",
-          "blob": "6110b7bf2f4adc7924384b694157e324",
-          "size": 49257,
+          "blob": "06c2f8b8177af65b1cc2d9a6a5e7c8d3",
+          "size": 68467,
           "type": "image/png"
         },
         "slide-04.png": {
           "name": "slide-04.png",
-          "blob": "8c07a67630830c8bcabfce333c806f0b",
-          "size": 69987,
+          "blob": "fe49fd0bbc59411055cc6c9393a3781c",
+          "size": 78138,
           "type": "image/png"
         },
         "slide-05.png": {
           "name": "slide-05.png",
-          "blob": "d2c7e65805c5729c2474c799e4be3bbc",
-          "size": 65995,
+          "blob": "a97fd8064be6a5c105d98a97e6288573",
+          "size": 73149,
           "type": "image/png"
         },
         "slide-06.png": {
           "name": "slide-06.png",
-          "blob": "f15158cf038ecbb75f0acef59a42e7dd",
-          "size": 69282,
+          "blob": "c1c656a377e5309e62d30f042431889e",
+          "size": 56233,
           "type": "image/png"
         },
         "slide-07.png": {
           "name": "slide-07.png",
-          "blob": "ba9fa4a0d6ba1a2d3838e46aaa5bba82",
-          "size": 76604,
+          "blob": "b50efa5ddc9eba686d36431dfcdd1eb4",
+          "size": 61965,
           "type": "image/png"
         },
         "slide-08.png": {
           "name": "slide-08.png",
-          "blob": "7b7c0489db3cc4037b73fc6c3d784494",
-          "size": 55111,
+          "blob": "330b803fca08c935e308f46876ef3bc2",
+          "size": 64461,
           "type": "image/png"
         },
         "slide-09.png": {
           "name": "slide-09.png",
-          "blob": "f709073acb0322c8e26f0782a158fd90",
-          "size": 40510,
+          "blob": "5ea02df56016b966ad3356d80d78ba44",
+          "size": 71756,
           "type": "image/png"
+        },
+        "slide-10.png": {
+          "name": "slide-10.png",
+          "blob": "7b5ff4f7d76cbc0197785b15789ebdc5",
+          "size": 44336,
+          "type": "image/png"
+        },
+        "slide-11.png": {
+          "name": "slide-11.png",
+          "blob": "d7defc5cfaaef5fb0e5e9d00f1c93785",
+          "size": 30463,
+          "type": "image/png"
+        },
+        "slide-12.png": {
+          "name": "slide-12.png",
+          "blob": "481a08982e0245aad48009253724c2ca",
+          "size": 62711,
+          "type": "image/png"
+        }
+      }
+    },
+    "Mountains": {
+      "name": "Mountains",
+      "tile": "l",
+      "order": [
+        "yatsugatake.svg",
+        "tateshina.svg"
+      ],
+      "files": {
+        "yatsugatake.svg": {
+          "name": "yatsugatake.svg",
+          "blob": "6616214e8833cfa8b99d165468d016df",
+          "size": 9785,
+          "type": "image/svg+xml"
+        },
+        "tateshina.svg": {
+          "name": "tateshina.svg",
+          "blob": "7e2b3f81c78af3ec4064ff47c5b4c1b2",
+          "size": 4429,
+          "type": "image/svg+xml"
         }
       }
     }
@@ -149,6 +192,7 @@
     "sections": []
   },
   "groups": [
+    "Mountains",
     "Logos",
     "Profile",
     "OG",
@@ -156,9 +200,9 @@
   ],
   "lastChange": {
     "by": "Claude",
-    "at": "2026-11-20T17:50:00Z",
+    "at": "2026-11-22T01:15:00Z",
     "via": "Claude Code",
-    "note": "Marp テーマ obi1 とテンプレート、スライド節・Slides カードを追加"
+    "note": "山のモチーフに山肌を追加: 八ヶ岳は塗りと峰の雪、蓼科山は雪の冠と右斜面の陰。表紙・章扉・締めのスライドと OG 画像を更新"
   },
   "layout": "files",
   "libraries": [],

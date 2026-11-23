@@ -3,13 +3,10 @@ marp: true
 theme: obi1
 size: 16:9
 paginate: true
-header: Cloudflare MCP Portal
 footer: obi1.dev
 ---
 
 <!-- _class: title -->
-<!-- _header: "" -->
-<!-- _footer: "" -->
 <!-- _paginate: skip -->
 
 # Cloudflare の MCP Server Portal を<br>ハンズオンで試す
@@ -19,13 +16,14 @@ obi1 · Web Application Engineer
 
 ---
 
-## この発表で話すこと
+## 今日話すこと
 
-- MCP Server Portal で **複数の MCP サーバーを一つの入口** にまとめる
-- Cloudflare Access でアクセスを制御する
-- 実際に試してつまずいた点
-
-> 試してみた技術や、開発のなかで得た学びをまとめています。
+1. MCP Server Portal とは
+2. 環境を準備する
+   - Access のアプリケーション
+   - ポータルの作成
+3. 試してつまずいた点
+4. まとめ
 
 ---
 
@@ -33,25 +31,55 @@ obi1 · Web Application Engineer
 
 <div class="label">01</div>
 
-## 環境を準備する
+## MCP Server Portal とは
 
-Access のアプリケーションとポータルを作成します
+複数の MCP サーバーを一つの入口にまとめる
+
+---
+
+<!-- _class: term -->
+
+# Throughput
+
+スループット
+
+**単位時間あたりにどれだけ処理できるかを示す量**
+
+- 1 秒あたりのリクエスト数（rps）で測ることが多い
+- 並列数を増やすと大きくなる
+- 遅延（レイテンシー）とは別の指標
 
 ---
 
 ## API トークンを発行する
+
+**トークンは用途ごとに分け、権限を最小にする**
 
 <div class="code-title">wrangler.jsonc</div>
 
 ```jsonc
 {
   "name": "mcp-portal-demo",
-  "main": "src/index.ts",
-  "compatibility_date": "2026-07-01" // 互換日付
+  "compatibility_date": "2026-07-01"
 }
 ```
 
 <div class="callout warning"><span>⚠️</span><p>トークンは <code>.dev.vars</code> に置き、リポジトリにコミットしないでください。</p></div>
+
+---
+
+## リクエストの流れ
+
+**入口は一つ、認可は Access に集約する**
+
+<div class="flow">
+  <span class="box">Client</span><span class="arrow">→</span>
+  <span class="box strong">Portal</span><span class="arrow">→</span>
+  <span class="box">Access</span><span class="arrow">→</span>
+  <span class="box">MCP Server</span>
+</div>
+
+<div class="kpi"><div><b>3</b><span>接続した MCP サーバー</span></div><div><b>44<small>ms</small></b><span>ポータル経由の追加遅延</span></div></div>
 
 ---
 
@@ -73,7 +101,7 @@ Access のアプリケーションとポータルを作成します
 ### ポータル経由
 
 - 入口は一つ
-- 認可は Access に集約
+- 認可は Access に *集約* できる
 
 </div>
 </div>
@@ -102,16 +130,23 @@ Access のアプリケーションとポータルを作成します
 
 ---
 
-<!-- _class: center -->
+<!-- _class: quote -->
 
-# 入口を一つにすると、<br>管理がぐっと楽になる
+> 計測せよ。計測するまで高速化のためにチューニングしてはいけない。
+>
+> — Rob Pike, Notes on Programming in C
 
-<p class="caption">まとめ</p>
+---
+
+<!-- _class: keyword -->
+
+# 入口は一つに
+
+まとめ
 
 ---
 
 <!-- _class: end -->
-<!-- _header: "" -->
 <!-- _footer: "" -->
 
 <img class="avatar" src="obi1-profile.png" alt="obi1のプロフィール画像">
